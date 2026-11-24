@@ -1,0 +1,192 @@
+:root {
+  --bg: #0d1117;
+  --card: #161b22;
+  --card-2: #1f2630;
+  --line: #2a323d;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --accent: #4f9dff;
+  --alert: #ff9f43;
+  --radius: 18px;
+  --gap: 16px;
+  --tabs-h: 76px;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); overflow: hidden; }
+body {
+  font: 18px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  user-select: none; -webkit-user-select: none; touch-action: pan-x pan-y;
+  cursor: none; /* kiosk: hide mouse pointer */
+}
+@media (hover: hover) { body { cursor: auto; } }
+h1 { font-size: 30px; margin: 0; font-weight: 600; }
+h2 { font-size: 15px; margin: 0 0 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 600; }
+h3 { margin: 8px 0; }
+ul { list-style: none; margin: 0; padding: 0; }
+.muted { color: var(--muted); }
+.small { font-size: 14px; }
+button, input, select { font: inherit; color: inherit; }
+input, select { background: var(--card-2); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; min-width: 0; }
+input { flex: 1; user-select: text; }
+.btn { background: var(--accent); color: #fff; border: 0; border-radius: 12px; padding: 12px 20px; font-weight: 600; text-decoration: none; display: inline-block; }
+.btn.ghost { background: var(--card-2); color: var(--text); }
+.btn.small { padding: 8px 14px; font-size: 14px; }
+.btn:disabled { opacity: .4; }
+.x { background: none; border: 0; color: var(--muted); font-size: 26px; line-height: 1; padding: 0 6px; margin-left: auto; }
+.row { display: flex; gap: 10px; align-items: center; margin: 10px 0; }
+
+/* ---------- Layout: horizontal swipe track ---------- */
+.track {
+  position: fixed; inset: 0 0 var(--tabs-h) 0;
+  display: flex; overflow-x: auto; overflow-y: hidden;
+  scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior: contain;
+}
+.track::-webkit-scrollbar { display: none; }
+.page { flex: 0 0 100%; height: 100%; overflow-y: auto; scroll-snap-align: start; scroll-snap-stop: always; padding: 20px 24px; }
+.tabs {
+  position: fixed; left: 0; right: 0; bottom: 0; height: var(--tabs-h);
+  display: flex; overflow-x: auto; scrollbar-width: none; background: #0a0d12; border-top: 1px solid var(--line);
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab { flex: 1 0 84px; background: none; border: 0; color: var(--muted); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }
+.tab span { font-size: 26px; filter: grayscale(.7); }
+.tab small { font-size: 12px; }
+.tab.on { color: var(--text); box-shadow: inset 0 3px 0 var(--accent); }
+.tab.on span { filter: none; }
+
+.grid { display: grid; gap: var(--gap); margin-bottom: var(--gap); }
+.cols-3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.cols-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; margin-bottom: var(--gap); min-width: 0; }
+.grid > .card { margin-bottom: 0; }
+.page-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
+.page-head h2 { margin: 0; }
+.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex: none; }
+.alert, .alert-text { color: var(--alert); }
+
+/* ---------- Home ---------- */
+.home-grid { min-height: calc(100% - 16px); grid-template-rows: 1fr 1fr auto; grid-template-columns: 1.3fr 1fr 1fr; grid-template-areas: "clock events shop" "clock notes notes" "strip strip strip"; }
+.clock-card { grid-area: clock; display: flex; flex-direction: column; justify-content: center; }
+.big-clock { font-size: clamp(64px, 11vw, 140px); font-weight: 200; line-height: 1; font-variant-numeric: tabular-nums; }
+.date { font-size: 24px; color: var(--muted); margin: 6px 0 24px; }
+.weather-now { display: flex; align-items: center; gap: 14px; font-size: 20px; }
+.weather-now small { color: var(--muted); font-size: 15px; }
+.wx-ico { font-size: 48px; }
+.wx-temp { font-size: 52px; font-weight: 300; }
+.events-card { grid-area: events; } .shop-card { grid-area: shop; }
+.events li { display: flex; gap: 10px; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--line); }
+.events .when { color: var(--muted); font-size: 15px; min-width: 96px; }
+.mini-list li { padding: 6px 0; border-bottom: 1px solid var(--line); }
+.notes-card { grid-area: notes; }
+.notes li { display: flex; gap: 8px; align-items: center; padding: 8px 12px; margin-bottom: 6px; background: var(--card-2); border-left: 4px solid; border-radius: 8px; }
+.strip { grid-area: strip; display: flex; gap: 32px; align-items: center; font-size: 19px; flex-wrap: wrap; }
+.strip > div { display: flex; align-items: center; gap: 8px; }
+.lid { width: 22px; height: 22px; border-radius: 6px; display: inline-block; vertical-align: middle; margin-right: 2px; }
+
+/* ---------- Calendar ---------- */
+.legend { display: flex; gap: 16px; color: var(--muted); font-size: 15px; }
+.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; }
+.week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 10px; }
+.day { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 10px; min-height: 60vh; }
+.day.today { border-color: var(--accent); }
+.day-head { color: var(--muted); margin-bottom: 8px; }
+.day-head b { color: var(--text); font-size: 22px; margin-left: 4px; }
+.ev { background: color-mix(in srgb, var(--c) 22%, transparent); border-left: 4px solid var(--c); border-radius: 8px; padding: 6px 8px; margin-bottom: 6px; font-size: 15px; }
+.ev small { display: block; color: var(--muted); font-size: 12px; }
+
+/* ---------- Lists ---------- */
+.checklist li { display: flex; gap: 14px; align-items: center; padding: 14px 4px; border-bottom: 1px solid var(--line); font-size: 20px; }
+.checklist .box { width: 28px; height: 28px; border: 2px solid var(--muted); border-radius: 8px; flex: none; }
+.checklist .done { color: var(--muted); text-decoration: line-through; }
+.checklist .done .box { background: var(--accent); border-color: var(--accent); }
+
+/* ---------- Meals ---------- */
+.meals-grid { grid-template-columns: 1fr 1.2fr; }
+.tonight { display: flex; flex-direction: column; justify-content: center; text-align: center; }
+.tonight-meal { font-size: clamp(32px, 5vw, 56px); font-weight: 300; }
+.meal-week li { display: flex; justify-content: space-between; padding: 14px 4px; border-bottom: 1px solid var(--line); font-size: 19px; }
+.meal-week li.today { color: var(--accent); }
+
+/* ---------- Stats ---------- */
+.stat-v { font-size: 44px; font-weight: 300; font-variant-numeric: tabular-nums; }
+.stat-v small { font-size: 18px; color: var(--muted); margin-left: 4px; }
+.small-v { font-size: 24px; }
+.chips { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.chip { background: var(--card-2); border: 1px solid var(--line); border-radius: 999px; padding: 12px 20px; }
+.chip.on { background: #3a3000; border-color: #f5c518; }
+.status li { display: flex; gap: 10px; align-items: center; padding: 6px 0; }
+
+/* ---------- Weather ---------- */
+.weather-grid { grid-template-columns: 1fr 1.1fr; height: 100%; }
+.weather-now.big { margin-bottom: 18px; }
+.hourly, .daily { display: flex; gap: 6px; overflow-x: auto; margin-bottom: 18px; scrollbar-width: none; }
+.hourly > div, .daily > div { flex: 0 0 64px; display: flex; flex-direction: column; align-items: center; gap: 2px; background: var(--card-2); border-radius: 12px; padding: 8px 4px; }
+.daily > div { flex: 1 0 64px; }
+.rain { color: #6cb6ff; }
+.radar { display: flex; flex-direction: column; padding-bottom: 20px; }
+.radar iframe { flex: 1; width: 100%; border: 0; border-radius: 12px; background: var(--card-2); min-height: 360px; }
+
+/* ---------- Bins ---------- */
+.bins { display: flex; gap: 40px; justify-content: center; padding: 20px 0; }
+.bin { display: flex; flex-direction: column; align-items: center; gap: 0; }
+.bin-lid { width: 150px; height: 26px; border-radius: 10px 10px 4px 4px; }
+.bin-body { width: 130px; height: 170px; background: #3a4048; border-radius: 0 0 14px 14px; margin-bottom: 12px; }
+.bin span { font-size: 20px; }
+.bin-next h2 { font-size: 24px; text-transform: none; letter-spacing: 0; color: var(--text); text-align: center; }
+.bin-next h2.alert-text { color: var(--alert); }
+.bin-upcoming li { display: flex; gap: 14px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.bin-upcoming b { min-width: 120px; }
+
+/* ---------- EV ---------- */
+.ev-grid { grid-template-columns: 1.4fr 1fr 1fr; }
+.battery-card { display: flex; flex-direction: column; gap: 12px; justify-content: center; }
+.battery { position: relative; height: 90px; border: 3px solid var(--muted); border-radius: 16px; overflow: hidden; }
+.battery::after { content: ''; position: absolute; right: -3px; top: 28px; width: 0; }
+.battery-fill { height: 100%; background: #30a46c; transition: width .6s; }
+.battery-fill.low { background: var(--alert); }
+.battery span { position: absolute; inset: 0; display: grid; place-items: center; font-size: 40px; font-weight: 600; text-shadow: 0 1px 4px #000; }
+
+/* ---------- Recipes ---------- */
+.recipe-grid { grid-template-columns: 1.6fr 1fr; }
+.recipe-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+.recipe-tile { background: var(--card-2); border: 1px solid var(--line); border-radius: 14px; padding: 20px; text-align: left; display: flex; flex-direction: column; gap: 4px; }
+.recipe-tile small { color: var(--muted); }
+.ingredients li { padding: 4px 0; }
+.ingredients li::before { content: '• '; color: var(--accent); }
+.step { background: var(--card-2); border-radius: 14px; padding: 20px; margin: 14px 0; }
+.step p { font-size: 26px; margin: 8px 0 16px; }
+.timers ul { margin-top: 14px; }
+.timers li { display: grid; grid-template-columns: 1fr auto auto; gap: 4px 10px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.timers li b { font-size: 26px; font-variant-numeric: tabular-nums; }
+.timers progress { grid-column: 1 / 3; width: 100%; accent-color: var(--accent); }
+.timers li.alert b { animation: blink 1s infinite; }
+@keyframes blink { 50% { opacity: .2; } }
+
+/* ---------- Doodle ---------- */
+.doodle-grid { grid-template-columns: 2fr 1fr; height: calc(100% - 4px); }
+.pad-card { display: flex; flex-direction: column; }
+.pad-card canvas { flex: 1; width: 100%; min-height: 300px; background: #0a0d12; border-radius: 12px; touch-action: none; }
+.swatch { width: 36px; height: 36px; border-radius: 50%; border: 3px solid transparent; }
+.swatch.on { border-color: var(--text); outline: 2px solid var(--bg); }
+.quick-notes li { display: flex; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); }
+
+/* ---------- Overlays: night clock and idle slideshow ---------- */
+.overlay { position: fixed; inset: 0; z-index: 10; background: #000; display: grid; place-items: center; }
+.overlay[hidden] { display: none; }
+.overlay .slide { position: absolute; inset: 0; background: center / cover no-repeat; animation: fade 1.5s; }
+.overlay.slideshow .ov-text { position: absolute; left: 40px; bottom: 32px; text-shadow: 0 2px 12px #000; }
+.overlay.slideshow:not(:has(.slide)) .ov-text { position: static; }
+.ov-clock { font-size: clamp(80px, 14vw, 180px); font-weight: 200; line-height: 1; font-variant-numeric: tabular-nums; }
+.ov-date { font-size: 26px; opacity: .8; }
+.overlay.night { color: #6b2a1a; } /* dim warm red: easy on the eyes at night */
+.overlay.night .ov-date { display: none; }
+@keyframes fade { from { opacity: 0; } }
+
+/* ---------- Smaller screens ---------- */
+@media (max-width: 900px) {
+  .home-grid { grid-template-rows: none; grid-template-columns: 1fr 1fr; grid-template-areas: "clock clock" "events shop" "notes notes" "strip strip"; }
+  .week { grid-template-columns: repeat(7, 150px); overflow-x: auto; }
+  .meals-grid, .weather-grid, .ev-grid, .recipe-grid, .doodle-grid { grid-template-columns: 1fr; height: auto; }
+  .page { padding: 16px; }
+}
