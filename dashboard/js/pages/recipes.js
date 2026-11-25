@@ -40,7 +40,7 @@ export function addTimer(label, minutes) {
 const mmss = (ms) => { const s = Math.max(0, Math.ceil(ms / 1000)); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
 
 export default {
-  id: 'recipes', label: 'Recipes', icon: '📖',
+  id: 'recipes', label: 'Recipes',
   state: { recipe: null, step: 0 },
   render(root) {
     root.innerHTML = `<div class="grid recipe-grid">

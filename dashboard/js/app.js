@@ -1,6 +1,7 @@
 import { CONFIG } from './config.js';
 import { $, $$, fmtTime, fmtDay, now } from './util.js';
 import { haEnabled, state } from './ha.js';
+import { icon } from './icons.js';
 import home from './pages/home.js';
 import calendar from './pages/calendar.js';
 import lists from './pages/lists.js';
@@ -13,6 +14,9 @@ import bins from './pages/bins.js';
 import ev from './pages/ev.js';
 import recipes from './pages/recipes.js';
 import doodle from './pages/doodle.js';
+
+// Colour theme: config.js, or ?theme=ink|clay|coral to preview
+document.documentElement.dataset.theme = new URLSearchParams(location.search).get('theme') || CONFIG.theme || 'ink';
 
 const ALL = [home, calendar, lists, meals, energy, ai, commute, weather, bins, ev, recipes, doodle];
 const track = $('#track');
@@ -34,7 +38,7 @@ function build() {
     try { p.render(el); p.refresh?.(el)?.catch?.(console.error); } catch (e) { console.error(p.id, e); }
     const b = document.createElement('button');
     b.className = 'tab'; b.dataset.tab = p.id;
-    b.innerHTML = `<span>${p.icon}</span><small>${p.label}</small>`;
+    b.innerHTML = `${icon(p.id)}<small>${p.label}</small>`;
     tabs.append(b);
   }
   if (!pages.find((p) => p.id === current)) current = 'home';

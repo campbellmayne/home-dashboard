@@ -5,7 +5,7 @@ const bin = (lid) => `<div class="bin"><div class="bin-lid" style="background:${
   <div class="bin-body"></div><span>${LIDS[lid].label}</span></div>`;
 
 export default {
-  id: 'bins', label: 'Bins', icon: '🗑️',
+  id: 'bins', label: 'Bins',
   render(root) {
     root.innerHTML = `<div class="page-head"><h1>Bin day</h1></div>
       <section class="card bin-next"><div data-banner></div><div class="bins" data-bins></div></section>

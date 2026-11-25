@@ -4,7 +4,7 @@ import { getEvents, personColour } from '../data.js';
 import { haEnabled } from '../ha.js';
 
 export default {
-  id: 'calendar', label: 'Calendar', icon: '📅',
+  id: 'calendar', label: 'Calendar',
   render(root) {
     root.innerHTML = `
       <div class="page-head"><h1>This week</h1>

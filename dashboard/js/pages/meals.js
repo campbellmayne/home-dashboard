@@ -4,7 +4,7 @@ import { getMeals, setMeal } from '../data.js';
 const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 export default {
-  id: 'meals', label: 'Meals', icon: '🍽️',
+  id: 'meals', label: 'Meals',
   render(root) {
     root.innerHTML = `
       <div class="grid meals-grid">

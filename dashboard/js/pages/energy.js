@@ -7,7 +7,7 @@ const tile = (label, value, unit, sub = '') => `
   <section class="card stat"><h2>${label}</h2><div class="stat-v">${value ?? '–'}<small>${unit}</small></div><div class="muted small">${sub}</div></section>`;
 
 export default {
-  id: 'energy', label: 'House', icon: '⚡',
+  id: 'energy', label: 'House',
   render(root) {
     root.innerHTML = `<div class="page-head"><h1>House and energy</h1></div>
       <div class="grid cols-4" data-stats></div>

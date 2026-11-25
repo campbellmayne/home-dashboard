@@ -2,7 +2,7 @@ import { esc } from '../util.js';
 import { LISTS, getList, addItem, toggleItem, clearDone } from '../data.js';
 
 export default {
-  id: 'lists', label: 'Lists', icon: '✅',
+  id: 'lists', label: 'Lists',
   render(root) {
     root.innerHTML = `<div class="grid cols-3">${LISTS.map((l) => `
       <section class="card list-card" data-list="${l.id}">

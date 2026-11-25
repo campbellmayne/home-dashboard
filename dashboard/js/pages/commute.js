@@ -4,7 +4,7 @@ import { fmtTime, now } from '../util.js';
 const C = CONFIG.commute;
 
 export default {
-  id: 'commute', label: 'Commute', icon: '🚗',
+  id: 'commute', label: 'Commute',
   visible: () => C.days.includes(now().getDay()),
   render(root) {
     root.innerHTML = `<div class="page-head"><h1>Office day</h1></div>

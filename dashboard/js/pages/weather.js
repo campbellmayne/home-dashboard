@@ -5,7 +5,7 @@ import { getWeather, describe } from '../weather.js';
 const RADAR = 'https://www.rainviewer.com/map.html?loc=-37.81,144.96,8&oFa=0&oC=1&oU=0&oCS=1&oF=0&oAP=1&c=3&o=83&lm=1&layer=radar&sm=1&sn=1';
 
 export default {
-  id: 'weather', label: 'Weather', icon: '🌦️',
+  id: 'weather', label: 'Weather',
   render(root) {
     root.innerHTML = `<div class="grid weather-grid">
       <section class="card"><h2>Now</h2><div data-now></div><h2>Next 24 hours</h2><div class="hourly" data-hourly></div>

@@ -6,7 +6,7 @@ import { load, save } from '../store.js';
 const E = CONFIG.homeAssistant.entities;
 
 export default {
-  id: 'ev', label: 'EV', icon: '🔋',
+  id: 'ev', label: 'EV',
   render(root) {
     root.innerHTML = `<div class="page-head"><h1>${CONFIG.ev.model}</h1></div>
       <div class="grid ev-grid">

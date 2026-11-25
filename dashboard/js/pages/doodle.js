@@ -4,7 +4,7 @@ import { load, save, uid } from '../store.js';
 const COLOURS = ['#ffffff', '#4f9dff', '#ff7aa8', '#f5c518', '#30a46c', '#e5484d'];
 
 export default {
-  id: 'doodle', label: 'Notes', icon: '✏️',
+  id: 'doodle', label: 'Notes',
   render(root) {
     root.innerHTML = `<div class="grid doodle-grid">
       <section class="card pad-card">

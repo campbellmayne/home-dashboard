@@ -2,6 +2,8 @@
 // Anything marked TODO is an open question in README.md.
 
 export const CONFIG = {
+  theme: 'ink', // ink (light, cool) | clay (dark, terracotta) | coral (bright white, coral)
+
   location: { name: 'Melbourne', lat: -37.8136, lon: 144.9631, tz: 'Australia/Melbourne' },
 
   people: [

@@ -17,7 +17,7 @@ async function apiStatus() {
 }
 
 export default {
-  id: 'ai', label: 'AI', icon: '🤖',
+  id: 'ai', label: 'AI',
   render(root) {
     root.innerHTML = `<div class="page-head"><h1>AI status</h1></div>
       <div class="grid cols-3" data-stats></div>

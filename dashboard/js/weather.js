@@ -11,20 +11,30 @@ const CODES = {
 };
 export const describe = (code) => CODES[code] ?? ['–', '🌡️'];
 
+// Line-icon name for a weather code (see icons.js)
+export function wxIcon(code, isDay = 1) {
+  if (code >= 95) return 'storm';
+  if ((code >= 51 && code <= 67) || (code >= 80 && code <= 82)) return 'rain';
+  if (code === 45 || code === 48) return 'fog';
+  if (code === 3) return 'cloud';
+  if (code === 1 || code === 2) return 'partly';
+  return isDay ? 'sun' : 'moon';
+}
+
 let inflight = null;
 
 export async function getWeather() {
   const cached = load('weather', null);
-  if (cached && Date.now() - cached.at < 15 * 60e3) return cached.data;
+  if (cached && cached.v === 2 && Date.now() - cached.at < 15 * 60e3) return cached.data;
   if (inflight) return inflight;
   const { lat, lon, tz } = CONFIG.location;
   const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&timezone=${encodeURIComponent(tz)}`
-    + '&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,relative_humidity_2m'
-    + '&hourly=temperature_2m,precipitation_probability,weather_code&forecast_hours=24'
+    + '&current=is_day,temperature_2m,apparent_temperature,weather_code,wind_speed_10m,relative_humidity_2m'
+    + '&hourly=is_day,temperature_2m,precipitation_probability,weather_code&forecast_hours=24'
     + '&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,uv_index_max&forecast_days=7';
   inflight = fetch(url)
     .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
-    .then((data) => { save('weather', { at: Date.now(), data }); return data; })
+    .then((data) => { save('weather', { v: 2, at: Date.now(), data }); return data; })
     .catch((e) => { console.warn('weather', e); return cached?.data ?? null; })
     .finally(() => { inflight = null; });
   return inflight;
