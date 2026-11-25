@@ -69,12 +69,27 @@ This sets the timezone to Melbourne, serves `dashboard/` on `localhost:8080`, la
 |------|-------|------|
 | Raspberry Pi 5, 4 GB (8 GB if running speech locally) | often backordered | 180–285 |
 | Official 27 W USB-C PSU, active cooler, 32–64 GB microSD | | 45–70 |
-| Micro-HDMI cable (+ HDMI-to-USB-C adapter if display only takes USB-C video) | Pi 5 USB-C is power only | 15–50 |
+| Micro-HDMI to mini-HDMI cable, 1–2 m | video | 15–25 |
+| USB-A to USB-C **data** cable | touch | 10–15 |
+| USB-C charger, 20–30 W | powers the display separately | 20–30 |
 | USB DAC or audio HAT + powered speaker | Pi 5 has no headphone jack | 20–150 |
 | Home Assistant Voice Preview Edition | far-field mic, wake word (step 4) | ~100 |
 | Shelly Plug S (12 A), straight into the wall, no power board | EV granny-charger energy | ~45 |
 
-**Display check:** see if its USB-C does DisplayPort Alt Mode (video) or only touch/power. If video: micro-HDMI → HDMI-to-USB-C (DP Alt) adapter, plus a USB cable for touch. Touch should work as a standard USB HID device.
+### Display wiring
+
+espresso display (about 7 years old, model unknown): mini-HDMI plus two USB-C ports.
+
+| From | Cable | To display |
+|------|-------|------------|
+| Pi 5 micro-HDMI **0** (next to the Pi's power port) | micro-HDMI to mini-HDMI | mini-HDMI |
+| Pi 5 USB-A port | USB-A to USB-C data cable | USB-C port that carries data (touch) |
+| Own 20–30 W USB-C charger | USB-C | the other USB-C port (power) |
+
+- Power the display from its own charger: the Pi 5's USB ports can't supply enough for the screen, and the Pi may brown out and reboot.
+- To find the touch port, look for icons beside the ports (a lightning bolt usually means power only). Otherwise, connect HDMI plus one USB-C cable at a time and tap the screen.
+- Use a cable known to carry data; charge-only cables won't pass touch.
+- Behind the frame, a double powerpoint can take the Pi PSU and the display charger. Never use a power board for the EV plug.
 
 ## Build order
 
@@ -87,7 +102,7 @@ Frame later: shadow box or 3D-printed bezel with vents and port access.
 
 ## Open questions
 
-- [ ] Display model and what its USB-C carries
+- [x] Display ports: mini-HDMI (video) + 2× USB-C (power; touch). Still to confirm which USB-C carries touch
 - [ ] BYD model (sets `ev.model`, `ev.batteryKwh`)
 - [ ] Calendar and list apps (Google, iCloud, Todoist…)
 - [ ] Commute mode (drive/train/tram) and work address
