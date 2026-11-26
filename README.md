@@ -78,7 +78,7 @@ This sets the timezone to Melbourne, serves `dashboard/` on `localhost:8080`, la
 
 ### Display wiring
 
-espresso display (about 7 years old, model unknown): mini-HDMI plus two USB-C ports.
+espresso 15 (15.6", 1920×1080 touch, about 7 years old): mini-HDMI plus two USB-C ports. The dashboard is laid out for 1920×1080.
 
 | From | Cable | To display |
 |------|-------|------------|
